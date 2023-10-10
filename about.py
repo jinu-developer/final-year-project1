@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit-extras
 
 from streamlit_extras.switch_page_button import switch_page
 st.set_page_config(page_title="OncoMRI: TumorTeller", page_icon="💊", layout="wide")
