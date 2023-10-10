@@ -1,9 +1,8 @@
 # OncoMRI: The Tumor Teller :pill: :computer:
 <p align="center">
 
-![OncoMRILOGO](https://github.com/Hs918131/OncoMRI/assets/91822610/9ec6036d-3e8e-4351-b513-83154f1618cd)
-  
-<img src="OncoMRILOGO.png" width="250" alt="Logo" />
+![logo-color](https://github.com/Hs918131/OncoMRI/assets/91822610/739362e9-302a-4207-8c19-75b6e5d30b0b)
+
 </p>
 </br>
 
