@@ -1,4 +1,4 @@
-// sets the document to automatically detect the language or style.
+// sets the document to automatically detect the language or style and format of the text.
 {
     "docwriter.style": "Auto-detect"
 }
