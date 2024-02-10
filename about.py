@@ -1,5 +1,7 @@
+# about.py is the about page of our website ONCO-MRI
 import streamlit as st
 
+# switch page is a library to switch between different pages in streamlit
 from streamlit_extras.switch_page_button import switch_page
 st.set_page_config(page_title="OncoMRI: TumorTeller", page_icon="💊", layout="wide")
 st.markdown(
@@ -21,16 +23,16 @@ st.markdown(
         """,
     unsafe_allow_html=True,
 )
-
+# this piece of code is the introduction to the website and will be displayed on this page.
 st.title("Welcome to OncoMRI: TumorTeller")
 
 st.write(
     "This project is made with the goal to help people identify types of tumors found within a MRI."
 )
 
-aps = st.button("Find Out!")
+aps = st.button("Find Out!") # to find out the type of tumour we have to click on this button
 if aps:
-    switch_page("predictor")
+    switch_page("predictor") # switch to the predictor.py page
 
 st.write("""This project was initiated because of the significant importance of brain cancer as a pressing issue. Brain cancer, including gliomas, meningiomas, and pituitary tumors, affects countless individuals and their families around the world. It is a devastating disease that can have profound effects on physical, emotional, and cognitive well-being. Understanding the causes, effects, and available treatments for these brain tumors is crucial for raising awareness, promoting early detection, and improving patient outcomes.
 
@@ -47,6 +49,7 @@ st.dataframe(
     },
     width=1000,
 )
+# Description about the types of tumour with the help of images.
 st.subheader("Glioma")
 st.write(
     """
@@ -72,6 +75,7 @@ A pituitary tumor, also known as pituitary adenoma, is a non-cancerous growth in
 st.image("images/petu.jfif", caption="Pituitary", width=350)
 
 st.header("Model")
+#  Model description and how it works
 st.write(
     "We used a dataset from Kaggle to train our model. The dataset is [linked here](https://www.kaggle.com/datasets/denizkavi1/brain-tumor) and our team annotated over 15000 images in order to train the ai model. The model we used was yolov7 because of its quick inference speed and high accuracy. The model was trained two times, the first one for 200 epochs on a batch size of 64 then a run for 100 epochs on the same batch size to fine tune the model further."
 )

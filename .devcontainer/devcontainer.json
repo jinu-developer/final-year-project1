@@ -1,14 +1,19 @@
+
+//  JSON object is used for describing a configuration for a Python 3 development environment using Docker.
+
 {
   "name": "Python 3",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
-  "customizations": {
-    "codespaces": {
-      "openFiles": [
+  
+  "customizations": { 
+    "codespaces": {// customization in the github codespace.
+      "openFiles": [// path to open the mentioned files by the editor.
         "README.md",
         "about.py"
       ]
     },
+    // the vs code section is used for settings and extentions in the editor for python 3 environment.
     "vscode": {
       "settings": {},
       "extensions": [
@@ -17,16 +22,22 @@
       ]
     }
   },
+  //A command to run when creating the container and rerun when the workspace content was updated while creating the container. This command is run after "onCreateCommand" and before "postCreateCommand". 
   "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit; echo '✅ Packages installed and Requirements met'",
+  //postattachcommand is command used to finalize the container setup when the dev container is set up.It used after the updatecontentcommand.
+  // postattachcommand array syntax command is executed without a shell
   "postAttachCommand": {
+    // the configuration will run on the streamlit server from the about.py page by disabling all the protections.
     "server": "streamlit run about.py --server.enableCORS false --server.enableXsrfProtection false"
   },
+  //portsattribute with port no. (8501) with label "application" means that any kind of traffic on this port will be forwarded to another device.
   "portsAttributes": {
     "8501": {
       "label": "Application",
-      "onAutoForward": "openPreview"
+      "onAutoForward": "openPreview"// automatically  opens preview when port forwarding starts.
     }
   },
+  // helps the redirecting traffic to move from one port to another 
   "forwardPorts": [
     8501
   ]

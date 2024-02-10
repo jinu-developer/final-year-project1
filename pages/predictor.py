@@ -1,14 +1,17 @@
-import streamlit as st
-import time
-from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
+
+import streamlit as st # we import the streamlit library to create a web application and host it
+import time #library used to give the real time and date updates
+# azure services use api key to request the data and the predicted image.
+from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient 
 from msrest.authentication import ApiKeyCredentials
-import requests
+import requests #request external services or api.
 
+#endpoint and prediction key have a constant communication with the azure custom vision.
 # Replace with your endpoint and prediction key
-ENDPOINT = "https://centralindia.api.cognitive.microsoft.com/"
-PREDICTION_KEY = "8f1324da86044e98bc87eab3cea0d778"
+ENDPOINT = "https://centralindia.api.cognitive.microsoft.com/"# the url is used to communicate with the custom vision which will be used to authenticate and request the services.
+PREDICTION_KEY = "8f1324da86044e98bc87eab3cea0d778"# the provided set of strings and numerics is the API key for Azure custom vision.
 
-# Create a prediction client
+# Create a prediction client and set up the streamlit page configuration.
 credentials = ApiKeyCredentials(in_headers={"Prediction-key": PREDICTION_KEY})
 predictor = CustomVisionPredictionClient(ENDPOINT, credentials)
 
@@ -34,7 +37,7 @@ doctors = [
     },
     # Add more doctors here...
 ]
-
+#fuction for calling doc's info while booking an appointment
 def book_appointment(doctor_name, patient_email, patient_name):
     # Add your booking logic here, e.g., database integration, etc.
 
@@ -47,14 +50,17 @@ def book_appointment(doctor_name, patient_email, patient_name):
     doctor_email = get_doctor_email(doctor_name)
     send_appointment_email(doctor_email, patient_email, doctor_name, patient_name)
 
-
+    #calls the function success using st(streamlit) once the appointment is booked
     st.success(f"Appointment booked with {doctor_name}. You will be contacted soon!")
 
 
 def send_confirmation_email(patient_email, doctor_name,patient_name):
    # Replace 'your_azure_logic_app_url' with the URL of your Azure logic app to send appointment emails
+    
+    # variable contains an URL that triggers an Azure Logic App workflow manually when accessed. It also includes the Logic App's endpoint, workflow ID,other parameters for authentication.
     azure_logic_app_url = f'https://prod-10.centralindia.logic.azure.com:443/workflows/5e4da251ed354e7291b18bbc4c46ab8d/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=PzoP9Rs5rxxqAGKwC8t3zLXPlRRpteXtBb1ekR8hppM'
-
+     
+     #email format
     email_data = {
         "to": patient_email,
          "name": patient_name,
@@ -63,6 +69,9 @@ def send_confirmation_email(patient_email, doctor_name,patient_name):
     }
 
 
+   # it makes a POST request to an Azure Logic App URL with email data in JSON format. It checks the status code either its 200 or 202 according to it reverts back the message as success or failure for confirmation of email.
+    # POST is a HTTP request method for sending or calling APIS's.
+   
     response = requests.post(azure_logic_app_url, json=email_data)
     if response.status_code == 200 or response.status_code == 202:
         st.success("Confirmation email sent to the patient.")
@@ -115,7 +124,7 @@ def doctor():
         else:
             book_appointment(selected_doctor, patient_email, patient_name)
 
-
+    # description of doctor with the function st.write as per users choice
     for doctor in doctors:
         if doctor["name"] == selected_doctor:
             st.subheader(doctor["name"])
@@ -125,7 +134,7 @@ def doctor():
 
 
 
-
+# Description about the types of tumour that will be dectected by the AI and for users to get a knowledge about.
 gcauses = """
 The exact causes of glioma, a type of brain tumor, are not fully understood. However, certain risk factors have been identified. These include exposure to ionizing radiation, a family history of glioma, and certain genetic disorders such as neurofibromatosis type 1 and Li-Fraumeni syndrome. While these factors may increase the risk, in many cases, the underlying cause of glioma remains unknown.
 """
@@ -170,6 +179,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.title("OncoMRI: TheTumorTeller")
+#in this section we upload our MRI scan image in order for AI to detect the type of tumour
 st.text(
     "Upload an image of a close up of a tumerous MRI scan and we will tell you what type it is."
 )
@@ -181,32 +191,35 @@ with open("test.zip", "rb") as fp:
         file_name="test.zip",
         mime="application/zip",
     )
+    #image type to be uploaded.
 image = st.file_uploader(
     "Upload Image", type=["jpg", "jpeg", "png", "webp"], accept_multiple_files=False
 )
 
-if image is not None:
+if image is not None:#condition for no image found
     disp = False
     
     with image:
-        st.image(image, caption="Your MRI Scan", width=350)
-        image_data = image.read()
+        st.image(image, caption="Your MRI Scan", width=350)#once the image is uploaded the title your MRI scan will be shown.
+        image_data = image.read()#passed to custom vision for classification purpose.
         results = predictor.classify_image("6abac90a-193b-4a67-b10a-8dae2d78e206", "Iteration1", image_data)
     disp = True
     
     c = st.image("loader1.gif")
-    time.sleep(3)
+    time.sleep(3) # pauses the line for 3 second for processing and before showing the result.
     c.empty()
-    # Process and display the results
+
+    # Process and display the results after classification if img provived
     if results.predictions:
         st.subheader("Prediction Results:")
         name="unknown"
         predict=0
         for prediction in results.predictions:
+            #This part of code gives the result which has highest confidence score greater than 0.5 and sets the tag name.
             if prediction.probability > predict and prediction.probability > 0.5:
                 predict = prediction.probability
                 name = prediction.tag_name
-
+    #Once the tumour is detected it displays the name of the tumour along with its confidence level.
     if name!="unknown":
         st.text(f"Detected {name} with high confidence")
         if name == "Glioma":
@@ -216,22 +229,23 @@ if image is not None:
                 """
             )
             st.image("images/glioma.webp", caption="Glioma", width=350)
-            st.write("More Info")
+            st.write("More Info")#More info have three tabs ie:causes, effects and treatment.
 
             tab1, tab2, tab3 = st.tabs(
                 ["Causes", "Effects", "Treatment"]
             )
-            with tab1:
+            # we provide the link for all the tabs present
+            with tab1:#CAUSES OF GLIOMA TUMOUR
                 st.write(gcauses)
                 st.write(
                     "More Info can be found on the [Mayo clinic website](https://www.mayoclinic.org/diseases-conditions/glioma/symptoms-causes/syc-20350251)"
                 )
-            with tab2:
+            with tab2:#EFFECTS
                 st.write(geffects)
                 st.write(
                     "More Info can be found on the [Mayo clinic website](https://www.mayoclinic.org/diseases-conditions/glioma/symptoms-causes/syc-20350251)"
                 )
-            with tab3:
+            with tab3:#TREATMENT
                 st.write(gtreat)
                 st.write(
                     "More Info can be found on the [Mayo clinic website](https://www.mayoclinic.org/diseases-conditions/glioma/symptoms-causes/syc-20350251)"
@@ -297,5 +311,6 @@ if image is not None:
             doctor()
 
     else:
+        # if there is no disease detect then this message will be printed.
         st.text("No disease detected")
     
