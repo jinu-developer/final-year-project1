@@ -77,10 +77,7 @@ st.image("images/petu.jfif", caption="Pituitary", width=350)
 st.header("Contributors")
 #  Model description and how it works
 st.write(
-    "M.Abarna(210820205002)
-Jinu Johnson(210820205037)
-V.Joshini(210820205039)
-Under The Guidance of Dr.M.Robinson Joel , Kings engineering college"
+    "M.Abarna(210820205002) Jinu Johnson(210820205037) V.Joshini(210820205039) Under The Guidance of Dr.M.Robinson Joel , Kings engineering college"
 )
 st.write("The relevent graphs and info are shown below.")
 st.subheader("Run One")
