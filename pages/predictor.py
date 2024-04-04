@@ -22,18 +22,18 @@ st.set_page_config(page_title="OncoMRI: TheTumorTeller App")
 
 doctors = [
     {
-        "name": "Dr. Ayesha Khan",
+        "name": "Dr. Abc",
         "specialization": "Oncologist",
-        "location": "Lucknow",
+        "location": "chennai",
         "available_days": "Mon, Tue, Fri",
-        "contact": "ayesha200210@gmail.com",
+        "contact": "abc@gmail.com",
     },
     {
-        "name": "Dr. Harshit Sharma",
+        "name": "Dr. cde",
         "specialization": "Oncologist",
-        "location": "Lucknow",
+        "location": "chennai",
         "available_days": "Wed, Thu, Sat",
-        "contact": "hs918131@gmail.com",
+        "contact": "cde@gmail.com",
     },
     # Add more doctors here...
 ]
@@ -296,17 +296,17 @@ if image is not None:#condition for no image found
             with ctab1:
                 st.write(pcauses)
                 st.write(
-                    "More Info can be found on the [MAYO clinic website](https://www.mayoclinic.org/diseases-conditions/pituitary-tumors/symptoms-causes/syc-20350548)"
+                    "More Info can be found on the [MAYO clinic website](https://www.mayoclinic2.org/diseases-conditions/pituitary-tumors/symptoms-causes/syc-20350548)"
                 )
             with ctab2:
                 st.write(peffects)
                 st.write(
-                    "More Info can be found on the [MAYO clinic website](https://www.mayoclinic.org/diseases-conditions/pituitary-tumors/symptoms-causes/syc-20350548)"
+                    "More Info can be found on the [MAYO clinic website](https://www.mayoclinic2.org/diseases-conditions/pituitary-tumors/symptoms-causes/syc-20350548)"
                 )
             with ctab3:
                 st.write(ptreat)
                 st.write(
-                    "More Info can be found on the [MAYO clinic website](https://www.mayoclinic.org/diseases-conditions/pituitary-tumors/symptoms-causes/syc-20350548)"
+                    "More Info can be found on the [MAYO clinic website](https://www.mayoclinic2.org/diseases-conditions/pituitary-tumors/symptoms-causes/syc-20350548)"
                 )
             doctor()
 
