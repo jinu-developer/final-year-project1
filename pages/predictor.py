@@ -15,7 +15,7 @@ PREDICTION_KEY = "8f1324da86044e98bc87eab3cea0d778"# the provided set of strings
 credentials = ApiKeyCredentials(in_headers={"Prediction-key": PREDICTION_KEY})
 predictor = CustomVisionPredictionClient(ENDPOINT, credentials)
 
-st.set_page_config(page_title="OncoMRI: TheTumorTeller App")
+st.set_page_config(page_title="Intracranial tumor image classification")
 
 
 # dengue fever
@@ -64,7 +64,7 @@ def send_confirmation_email(patient_email, doctor_name,patient_name):
     email_data = {
         "to": patient_email,
          "name": patient_name,
-        "subject": "Appointment Confirmed at OncoMRI",
+        "subject": "Appointment Confirmed at KEC",
         "content": f"Your appointment with {doctor_name} has been booked successfully. You will be contacted soon.",
     }
 
