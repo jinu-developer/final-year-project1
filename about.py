@@ -27,7 +27,7 @@ st.markdown(
 st.title("Welcome to Intracranial tumor image classification")
 
 st.write(
-    "This project is made with the goal to help people identify types of tumors found within a MRI."
+    "This project is made with the goal to help people identify types of tumors found within a MRI by  M.Abarna , Jinu Johnson , V.Joshini under the guidance of Dr.M.Robinson Joel sir of Kings Engineering College"
 )
 
 aps = st.button("Find Out!") # to find out the type of tumour we have to click on this button
@@ -74,10 +74,13 @@ A pituitary tumor, also known as pituitary adenoma, is a non-cancerous growth in
 )
 st.image("images/petu.jfif", caption="Pituitary", width=350)
 
-st.header("Model")
+st.header("Contributors")
 #  Model description and how it works
 st.write(
-    "We used a dataset from Kaggle to train our model. The dataset is [linked here](https://www.kaggle.com/datasets/denizkavi1/brain-tumor) and our team annotated over 15000 images in order to train the ai model. The model we used was yolov7 because of its quick inference speed and high accuracy. The model was trained two times, the first one for 200 epochs on a batch size of 64 then a run for 100 epochs on the same batch size to fine tune the model further."
+    "M.Abarna(210820205002)
+Jinu Johnson(210820205037)
+V.Joshini(210820205039)
+Under The Guidance of Dr.M.Robinson Joel , Kings engineering college"
 )
 st.write("The relevent graphs and info are shown below.")
 st.subheader("Run One")
