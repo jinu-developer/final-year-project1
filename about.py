@@ -27,7 +27,7 @@ st.markdown(
 st.title("Welcome to Intracranial tumor image classification")
 
 st.write(
-    "This project is made with the goal to help people identify types of tumors found within a MRI by  M.Abarna , Jinu Johnson , V.Joshini under the guidance of Dr.M.Robinson Joel sir of Kings Engineering College"
+    "This project is made with the goal to help people to identify types of tumors found within a MRI image by  M.Abarna , Jinu Johnson , V.Joshini under the guidance of Dr.M.Robinson Joel sir of Kings Engineering College"
 )
 
 aps = st.button("Find Out!") # to find out the type of tumour we have to click on this button
