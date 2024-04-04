@@ -11,7 +11,7 @@ st.markdown(
                 background-repeat: no-repeat;                
             }
             [data-testid="stSidebarNav"]::before {
-                content: "OncoMRI";
+                content: "KEC project";
                 margin-left: 20px;
                 margin-top: 20px;
 
