@@ -3,7 +3,7 @@ import streamlit as st
 
 # switch page is a library to switch between different pages in streamlit
 from streamlit_extras.switch_page_button import switch_page
-st.set_page_config(page_title="OncoMRI: TumorTeller", page_icon="💊", layout="wide")
+st.set_page_config(page_title="final year project", page_icon="💊", layout="wide")
 st.markdown(
     """
         <style>
@@ -24,7 +24,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 # this piece of code is the introduction to the website and will be displayed on this page.
-st.title("Welcome to OncoMRI: TumorTeller")
+st.title("Welcome to Intracranial tumor image classification")
 
 st.write(
     "This project is made with the goal to help people identify types of tumors found within a MRI."
